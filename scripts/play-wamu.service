@@ -1,0 +1,21 @@
+[Unit]
+Description=Play WAMU service
+#After=network.target
+
+# The four settings under Service is for jackd support
+# LimitRTPRIO and LimitMEMLOCK must be set in systemd service file, because when run as a service
+# etc security limits.d audio.conf is not honored.  MEMLOCK unlimited is infinity in systemd
+[Service]
+#LimitRTPRIO=95
+#LimitMEMLOCK=infinity
+Environment="DISPLAY=:0"
+#Environment="JACK_NO_AUDIO_RESERVATION=1"
+ExecStart=/usr/bin/python3 -u play-wamu.py
+WorkingDirectory=/home/pi/pi-radio/simple
+StandardOutput=inherit
+StandardError=inherit
+Restart=on-failure
+User=pi
+
+[Install]
+WantedBy=multi-user.target
