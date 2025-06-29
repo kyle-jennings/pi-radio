@@ -78,10 +78,10 @@ def signal_handler(signum, frame):
 def find_audio_player():
     """Find available audio player and return command"""
     players = [
+        (['mplayer', '-nocache'], 'mplayer'),
         (['mpv', '--no-video', '--volume=80'], 'mpv'),
         (['mpg123'], 'mpg123'),
         (['vlc', '--intf', 'dummy', '--no-video'], 'vlc'),
-        (['mplayer', '-nocache'], 'mplayer'),
         (['ffplay', '-nodisp', '-autoexit'], 'ffplay')
     ]
     

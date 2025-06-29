@@ -1,25 +1,27 @@
 [Unit]
 Description=WAMU Radio Stream Player
 Documentation=Plays WAMU NPR radio stream continuously
-After=network-online.target sound.target
-Wants=network-online.target
-Requires=network-online.target
+After=network-online.target sound.target bluetooth.target
+Wants=network-online.target bluetooth.target
+Requires=network-online.target bluetooth.target
+StartLimitIntervalSec=30
+StartLimitBurst=1
 
 [Service]
 Type=simple
 User=pi
 Group=pi
 WorkingDirectory=/home/pi/pi-radio
-ExecStart=/usr/bin/python3 /home/pi/pi-radio/radio.py
+ExecStart=/usr/bin/python3 /home/pi/pi-radio/scripts/radio.py
 Restart=always
 RestartSec=15
-StartLimitInterval=300
-StartLimitBurst=5
 
 # Environment
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/pi
 Environment=PYTHONPATH=/home/pi/pi-radio
+Environment="XDG_RUNTIME_DIR=/run/user/1000"
+Environment="PULSE_RUNTIME_PATH=/run/user/1000/pulse/"
 
 # Security settings
 NoNewPrivileges=true

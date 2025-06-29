@@ -1,6 +1,6 @@
 # Radio Player Service
 
-The `radio-player.service` systemd unit file manages the WAMU radio stream player for continuous audio playback.
+The `radio.service` systemd unit file manages the WAMU radio stream player for continuous audio playback.
 
 ## Installation and Usage
 
@@ -9,7 +9,7 @@ The `radio-player.service` systemd unit file manages the WAMU radio stream playe
 Copy the service file to systemd directory and reload:
 
 ```bash
-sudo cp /home/pi/pi-radio/scripts/radio-player.service /etc/systemd/system/
+sudo cp /home/pi/pi-radio/scripts/radio.service /etc/systemd/system/
 sudo systemctl daemon-reload
 ```
 
@@ -18,8 +18,8 @@ sudo systemctl daemon-reload
 Enable the service to start automatically on boot and start it immediately:
 
 ```bash
-sudo systemctl enable radio-player.service
-sudo systemctl start radio-player.service
+sudo systemctl enable radio.service
+sudo systemctl start radio.service
 ```
 
 ### 3. Check Service Status
@@ -27,7 +27,7 @@ sudo systemctl start radio-player.service
 Verify the service is running correctly:
 
 ```bash
-sudo systemctl status radio-player.service
+sudo systemctl status radio.service
 ```
 
 Expected output should show:
@@ -38,39 +38,39 @@ Expected output should show:
 
 Monitor real-time logs:
 ```bash
-sudo journalctl -u radio-player.service -f
+sudo journalctl -u radio.service -f
 ```
 
 View recent logs:
 ```bash
-sudo journalctl -u radio-player.service --since "1 hour ago"
+sudo journalctl -u radio.service --since "1 hour ago"
 ```
 
 View logs from last boot:
 ```bash
-sudo journalctl -u radio-player.service -b
+sudo journalctl -u radio.service -b
 ```
 
 ### 5. Service Control Commands
 
 **Stop the service:**
 ```bash
-sudo systemctl stop radio-player.service
+sudo systemctl stop radio.service
 ```
 
 **Restart the service:**
 ```bash
-sudo systemctl restart radio-player.service
+sudo systemctl restart radio.service
 ```
 
 **Disable the service (prevent auto-start on boot):**
 ```bash
-sudo systemctl disable radio-player.service
+sudo systemctl disable radio.service
 ```
 
 **Re-enable the service:**
 ```bash
-sudo systemctl enable radio-player.service
+sudo systemctl enable radio.service
 ```
 
 ### Service Features
@@ -143,7 +143,7 @@ sudo raspi-config
 #### Service Keeps Restarting
 1. Check the service logs for error messages:
    ```bash
-   sudo journalctl -u radio-player.service --since "10 minutes ago"
+   sudo journalctl -u radio.service --since "10 minutes ago"
    ```
 
 2. Common issues:
@@ -205,7 +205,7 @@ The service automatically detects and uses available audio players in this order
 
 The service creates logs in two locations:
 
-1. **Systemd Journal**: `journalctl -u radio-player.service`
+1. **Systemd Journal**: `journalctl -u radio.service`
 2. **Local Log File**: `/var/log/radio.log` (or fallback locations)
 
 ### Service Restart Policy

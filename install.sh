@@ -13,7 +13,7 @@ cd $HOME
 echo Updating OS and installing system dependencies...
 sudo apt update
 
-sudo apt install pulseudio pulseaudio-module-bluetooth mpg123
+sudo apt install pulsaudio pulseaudio-module-bluetooth mpg123
 
 echo Starting Pulse Audio on boot
 echo "pulseaudio --start" >> ~/.bashrc
