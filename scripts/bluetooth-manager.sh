@@ -12,7 +12,9 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 SCRIPT_NAME="$(basename "$0")"
 LOCK_FILE="/tmp/${SCRIPT_NAME}.lock"
-LOG_FILE="$SCRIPT_DIR/bluetooth-manager.log"
+LOG_DIR="$ROOT_DIR/logs"
+LOG_FILE="$LOG_DIR/bluetooth-manager.log"
+
 
 # Logging function
 log() {
@@ -224,6 +226,16 @@ monitor_connection() {
 
 # Main function
 main() {
+    if [ ! -d "$LOG_DIR" ]; then
+        # Directory does not exist, so create it
+        mkdir "$LOG_DIR"
+    fi
+
+    # Create log file if it doesn't exist
+    if [ ! -f "$LOG_FILE" ]; then
+        touch "$LOG_FILE"
+    fi
+
     log "INFO" "Starting Bluetooth Connection Manager"
     
     # Check if already running

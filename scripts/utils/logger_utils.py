@@ -13,7 +13,12 @@ from pathlib import Path
 import inspect
 
 # Default log directory
-DEFAULT_LOG_DIR = "/var/log"
+# DEFAULT_LOG_DIR = "/var/log"
+FILE_PATH = os.path.realpath(__file__)
+FILE_DIR = os.path.dirname(FILE_PATH) # scripts/utils
+SCRIPTS_DIR = os.path.dirname(FILE_DIR)
+ROOT_DIR = os.path.dirname(SCRIPTS_DIR)
+DEFAULT_LOG_DIR =  ROOT_DIR + '/logs'
 
 def _get_caller_info():
     """
@@ -76,6 +81,10 @@ def setup_logging(log_file=None, log_level=logging.INFO, app_name=None,
     if log_file is None and file_output:
         log_file = _get_default_log_file(app_name)
     
+    logs_dir = os.path.dirname(log_file)
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
+
     # Set default format if not provided
     if log_format is None:
         log_format = f'%(asctime)s - {app_name} - %(levelname)s - %(message)s'

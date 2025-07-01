@@ -21,15 +21,7 @@ Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/pi
 
 # Security settings
-NoNewPrivileges=true
-ProtectHome=read-only
-ProtectSystem=strict
-ReadWritePaths=/home/pi/pi-radio /tmp /var/log
-
-# Process settings
-KillMode=mixed
-KillSignal=SIGTERM
-TimeoutStopSec=30
+ReadWritePaths=/home/pi/pi-radio/logs /tmp /var/log
 
 # Logging
 StandardOutput=journal
