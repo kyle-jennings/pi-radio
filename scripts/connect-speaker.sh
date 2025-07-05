@@ -13,7 +13,7 @@ ROOT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 SCRIPT_NAME="$(basename "$0")"
 LOCK_FILE="/tmp/${SCRIPT_NAME}.lock"
 LOG_DIR="$ROOT_DIR/logs"
-LOG_FILE="$LOG_DIR/bluetooth-manager.log"
+LOG_FILE="$LOG_DIR/connect-speaker.log"
 
 
 # Logging function
@@ -186,8 +186,9 @@ monitor_connection() {
     local mac="$1"
     local check_interval=30  # Check every 30 seconds
     local reconnect_attempts=0
-    local max_reconnect_attempts=3
-    
+    local max_reconnect_attempts=5
+    local max_recconnect_reached_reconnect_delay=120
+
     log "INFO" "Starting connection monitoring for $mac (check interval: ${check_interval}s)"
     
     while true; do
@@ -214,7 +215,7 @@ monitor_connection() {
                 
                 if [ $reconnect_attempts -ge $max_reconnect_attempts ]; then
                     log "ERROR" "Max reconnection attempts reached. Waiting longer before retry..."
-                    sleep 120  # Wait 2 minutes before trying again
+                    sleep $max_recconnect_reached_reconnect_delay 
                     reconnect_attempts=0
                 fi
             fi

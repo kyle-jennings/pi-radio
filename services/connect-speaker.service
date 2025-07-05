@@ -1,32 +1,31 @@
 [Unit]
 Description=Bluetooth Connection Manager
-Documentation=Manages Bluetooth device pairing, trusting, and connection monitoring
 After=bluetooth.service network.target
 Wants=bluetooth.service
 Requires=bluetooth.service
-StartLimitIntervalSec=30
-StartLimitBurst=1
+StartLimitIntervalSec=60s
+StartLimitBurst=2
 
 [Service]
 Type=simple
 User=pi
 Group=pi
-WorkingDirectory=/home/pi/pi-radio
-ExecStart=/home/pi/pi-radio/scripts/bluetooth-manager.sh
+WorkingDirectory=/home/pi/radio-pi
+ExecStart=/home/pi/radio-pi/scripts/connect-speaker.sh
 Restart=always
-RestartSec=15
+#RestartSec=15
 
 # Environment
 Environment=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 Environment=HOME=/home/pi
 
 # Security settings
-ReadWritePaths=/home/pi/pi-radio/logs /tmp /var/log
+ReadWritePaths=/home/pi/radio-pi/logs /tmp /var/log
 
 # Logging
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=bluetooth-manager
+SyslogIdentifier=connect-speaker
 
 [Install]
 WantedBy=multi-user.target

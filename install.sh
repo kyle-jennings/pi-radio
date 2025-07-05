@@ -1,12 +1,12 @@
 #!/bin/bash
 
 HOME=/home/pi
-APP_HOME=$HOME/pi-radio
+APP_HOME=$HOME/radio-pi
 SYSTEMD_HOME=/etc/systemd/system
 PI_RADIO_NAME=radio
 PI_RADIO_SERVICE=radio.service
-BT_MANAGER_SERVICE=bluetooth-manager.service
-BT_MANAGER_NAME=bluetooth-manager
+BT_MANAGER_SERVICE=connect-speaker.service
+BT_MANAGER_NAME=connect-speaker
 USER=pi
 
 echo PI Radio install starting...

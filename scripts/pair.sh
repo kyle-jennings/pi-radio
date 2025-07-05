@@ -3,7 +3,7 @@
 # Make this executable: chmod +x ~/scripts/autopair
 
 # Get the directory where this script is located
-SCRIPT_DIR="/home/pi/pi-radio"
+SCRIPT_DIR="/home/pi/radio-pi"
 # SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Source the .env file from the same directory

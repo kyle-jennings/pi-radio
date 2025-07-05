@@ -1,10 +1,10 @@
 # Scripts Directory
 
-This directory contains systemd service files and scripts for managing the pi-radio system components.
+This directory contains systemd service files and scripts for managing the radio-pi system components.
 
 ## Bluetooth Manager Service
 
-The `bluetooth-manager.service` systemd unit file manages the Bluetooth connection monitoring and automatic reconnection functionality.
+The `connect-speaker.service` systemd unit file manages the Bluetooth connection monitoring and automatic reconnection functionality.
 
 ### Installation and Usage
 
@@ -13,7 +13,7 @@ The `bluetooth-manager.service` systemd unit file manages the Bluetooth connecti
 Copy the service file to systemd directory and reload:
 
 ```bash
-sudo cp /home/pi/pi-radio/scripts/bluetooth-manager.service /etc/systemd/system/
+sudo cp /home/pi/radio-pi/scripts/connect-speaker.service /etc/systemd/system/
 sudo systemctl daemon-reload
 ```
 
@@ -22,8 +22,8 @@ sudo systemctl daemon-reload
 Enable the service to start automatically on boot and start it immediately:
 
 ```bash
-sudo systemctl enable bluetooth-manager.service
-sudo systemctl start bluetooth-manager.service
+sudo systemctl enable connect-speaker.service
+sudo systemctl start connect-speaker.service
 ```
 
 #### 3. Check Service Status
@@ -31,7 +31,7 @@ sudo systemctl start bluetooth-manager.service
 Verify the service is running correctly:
 
 ```bash
-sudo systemctl status bluetooth-manager.service
+sudo systemctl status connect-speaker.service
 ```
 
 Expected output should show:
@@ -42,39 +42,39 @@ Expected output should show:
 
 Monitor real-time logs:
 ```bash
-sudo journalctl -u bluetooth-manager.service -f
+sudo journalctl -u connect-speaker.service -f
 ```
 
 View recent logs:
 ```bash
-sudo journalctl -u bluetooth-manager.service --since "1 hour ago"
+sudo journalctl -u connect-speaker.service --since "1 hour ago"
 ```
 
 View logs from last boot:
 ```bash
-sudo journalctl -u bluetooth-manager.service -b
+sudo journalctl -u connect-speaker.service -b
 ```
 
 #### 5. Service Control Commands
 
 **Stop the service:**
 ```bash
-sudo systemctl stop bluetooth-manager.service
+sudo systemctl stop connect-speaker.service
 ```
 
 **Restart the service:**
 ```bash
-sudo systemctl restart bluetooth-manager.service
+sudo systemctl restart connect-speaker.service
 ```
 
 **Disable the service (prevent auto-start on boot):**
 ```bash
-sudo systemctl disable bluetooth-manager.service
+sudo systemctl disable connect-speaker.service
 ```
 
 **Re-enable the service:**
 ```bash
-sudo systemctl enable bluetooth-manager.service
+sudo systemctl enable connect-speaker.service
 ```
 
 ### Service Features
@@ -88,15 +88,15 @@ sudo systemctl enable bluetooth-manager.service
 ### Troubleshooting
 
 #### Service Won't Start
-1. Check if the bluetooth-manager.sh script exists and is executable:
+1. Check if the connect-speaker.sh script exists and is executable:
    ```bash
-   ls -la /home/pi/pi-radio/bluetooth-manager.sh
-   chmod +x /home/pi/pi-radio/bluetooth-manager.sh
+   ls -la /home/pi/radio-pi/connect-speaker.sh
+   chmod +x /home/pi/radio-pi/connect-speaker.sh
    ```
 
 2. Verify the .env file exists with MAC_ADDRESS:
    ```bash
-   cat /home/pi/pi-radio/.env
+   cat /home/pi/radio-pi/.env
    ```
 
 3. Check Bluetooth service status:
@@ -107,7 +107,7 @@ sudo systemctl enable bluetooth-manager.service
 #### Service Keeps Restarting
 1. Check the service logs for error messages:
    ```bash
-   sudo journalctl -u bluetooth-manager.service --since "10 minutes ago"
+   sudo journalctl -u connect-speaker.service --since "10 minutes ago"
    ```
 
 2. Common issues:
@@ -127,7 +127,7 @@ ping -c 1 google.com
 
 ### Configuration
 
-The service reads configuration from `/home/pi/pi-radio/.env`. Ensure this file contains:
+The service reads configuration from `/home/pi/radio-pi/.env`. Ensure this file contains:
 
 ```
 MAC_ADDRESS=AA:BB:CC:DD:EE:FF
@@ -139,8 +139,8 @@ Replace `AA:BB:CC:DD:EE:FF` with your actual Bluetooth device MAC address.
 
 The service creates logs in two locations:
 
-1. **Systemd Journal**: `journalctl -u bluetooth-manager.service`
-2. **Local Log File**: `/home/pi/pi-radio/bluetooth-manager.log`
+1. **Systemd Journal**: `journalctl -u connect-speaker.service`
+2. **Local Log File**: `/home/pi/radio-pi/connect-speaker.log`
 
 ### Service Restart Policy
 

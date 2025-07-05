@@ -9,7 +9,7 @@ The `radio.service` systemd unit file manages the WAMU radio stream player for c
 Copy the service file to systemd directory and reload:
 
 ```bash
-sudo cp /home/pi/pi-radio/scripts/radio.service /etc/systemd/system/
+sudo cp /home/pi/radio-pi/scripts/radio.service /etc/systemd/system/
 sudo systemctl daemon-reload
 ```
 
@@ -125,8 +125,8 @@ sudo raspi-config
 #### Service Won't Start
 1. Check if the radio.py script exists and dependencies are met:
    ```bash
-   ls -la /home/pi/pi-radio/radio.py
-   python3 /home/pi/pi-radio/radio.py --help
+   ls -la /home/pi/radio-pi/radio.py
+   python3 /home/pi/radio-pi/radio.py --help
    ```
 
 2. Verify audio player is installed:
@@ -234,7 +234,7 @@ The service runs with these security measures:
 ### Integration with Other Services
 
 This service can run alongside:
-- `bluetooth-manager.service` (for Bluetooth audio output)
+- `connect-speaker.service` (for Bluetooth audio output)
 - Other audio services (with proper configuration)
 - Monitoring services
 

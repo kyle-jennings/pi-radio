@@ -78,10 +78,7 @@ def signal_handler(signum, frame):
 def find_audio_player():
     """Find available audio player and return command"""
     players = [
-        #(['mplayer', '-nocache'], 'mplayer'),
-        #(['mpv', '--no-video', '--volume=80'], 'mpv'),
         (['mpg123'], 'mpg123'),
-        (['vlc', '--intf', 'dummy', '--no-video'], 'vlc'),
         (['ffplay', '-nodisp', '-autoexit'], 'ffplay')
     ]
     
@@ -141,6 +138,40 @@ def play_stream():
         logger.error(f"Error starting player: {e}")
         return False
 
+def check_bluetooth_devices():
+    """Check for connected Bluetooth devices and wait until one is found"""
+    logger.info("Checking for connected Bluetooth devices...")
+    
+    while True:
+        try:
+            result = subprocess.run(
+                ['bluetoothctl', 'devices', 'Connected'],
+                capture_output=True,
+                text=True,
+                timeout=10
+            )
+            
+            if result.returncode == 0:
+                connected_devices = result.stdout.strip()
+                if connected_devices:
+                    logger.info(f"Connected Bluetooth devices found:\n{connected_devices}")
+                    return  # Exit the loop and continue execution
+                else:
+                    logger.info("No Bluetooth devices connected. Waiting 30 seconds before checking again...")
+                    time.sleep(30)
+            else:
+                logger.warning(f"Failed to check Bluetooth devices (exit code: {result.returncode})")
+                logger.warning(f"Error output: {result.stderr.strip()}")
+                logger.info("Waiting 30 seconds before retrying...")
+                time.sleep(30)
+                
+        except subprocess.TimeoutExpired:
+            logger.warning("Bluetooth device check timed out. Waiting 30 seconds before retrying...")
+            time.sleep(30)
+        except Exception as e:
+            logger.warning(f"Error checking Bluetooth devices: {e}. Waiting 30 seconds before retrying...")
+            time.sleep(30)
+
 def main():
     """Main function"""
     global logger
@@ -163,6 +194,8 @@ def main():
         logger.info(f"!! Another instance already running). Exiting.")
         sys.exit(0)
     
+    # Check for connected Bluetooth devices
+    check_bluetooth_devices()
 
     # Play the stream
     success = play_stream()

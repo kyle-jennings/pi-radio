@@ -11,7 +11,7 @@ $ echo "pulseaudio --start" >> ~/.bashrc
 
 ### Add BT auto-connect scripts:
 $ echo "wait" >> ~/.bashrc
-$ echo "~/pi-radio/on.py" >> ~/.bashrc
+$ echo "~/radio-pi/on.py" >> ~/.bashrc
 
 ## Pair a BT speaker:
 

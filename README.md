@@ -22,7 +22,7 @@ $ python3 ./scripts/radio.py
 
 ## Deployment
 ```
-$ rsync -avz --progress --exclude='.git/' --exclude='.gitignore' --exclude='*.pyc' --exclude='__pycache__/' --exclude='.DS_Store' --exclude='*.log'  ./pi-radio pi@192.168.0.113:/home/pi/
+$ rsync -avz --progress --exclude='.git/' --exclude='.gitignore' --exclude='*.pyc' --exclude='__pycache__/' --exclude='.DS_Store' --exclude='*.log'  ./radio-pi pi@192.168.0.113:/home/pi/
 ```
 
 ## Stopping the Service
